@@ -1,3 +1,4 @@
+console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY ? "LOADED" : "MISSING");
 const express = require('express');
 const cors = require('cors');
 const OpenAI = require('openai');
