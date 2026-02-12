@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Initialize OpenAI with your environment variable
+// OpenAI initialization
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
@@ -23,11 +23,10 @@ app.post("/chat", async (req, res) => {
       messages: [
         { role: "system", content: "You are a helpful assistant for a Shopify store." },
         { role: "user", content: message }
-      ],
+      ]
     });
 
     const reply = completion.choices[0].message.content;
-
     res.json({ reply });
 
   } catch (error) {
@@ -36,10 +35,11 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-// Start the server
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
