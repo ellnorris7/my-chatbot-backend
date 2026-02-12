@@ -1,21 +1,18 @@
-// server.js
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
 
-app.use(express.json()); // allows JSON messages
+app.use(cors()); 
+app.use(express.json());
 
-// Chat endpoint
 app.post('/message', (req, res) => {
-    const userMessage = req.body.message; // get message from frontend
-    console.log("User said:", userMessage);
-
-    // For now, bot just echoes the message
-    const botReply = "You said: " + userMessage;
-    res.json({ reply: botReply });
+  const userMessage = req.body.message;
+  res.json({ reply: `You said: ${userMessage}` });
 });
 
-// Start the server
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log('Server running on port', port);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
+
